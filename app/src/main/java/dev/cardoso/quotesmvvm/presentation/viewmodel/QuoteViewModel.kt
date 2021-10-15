@@ -1,18 +1,13 @@
 package dev.cardoso.quotesmvvm.presentation.viewmodel
 
 import android.content.Context
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import dev.cardoso.quotesmvvm.core.convertToList
 import dev.cardoso.quotesmvvm.data.local.QuoteDB
 import dev.cardoso.quotesmvvm.data.local.daos.QuoteDAO
 import dev.cardoso.quotesmvvm.data.model.QuoteModel
-import dev.cardoso.quotesmvvm.data.model.QuoteProvider
-import dev.cardoso.quotesmvvm.domain.GetQuoteRandomUseCase
-import dev.cardoso.quotesmvvm.domain.GetQuoteUseCase
-import dev.cardoso.quotesmvvm.domain.GetQuotesUseCase
-import kotlinx.coroutines.CoroutineScope
+import dev.cardoso.quotesmvvm.domain.usecase.GetQuoteRandomUseCase
+import dev.cardoso.quotesmvvm.domain.usecase.GetQuotesUseCase
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 
@@ -26,7 +21,12 @@ class QuoteViewModel : ViewModel() {
 
     fun getQuotes() {
         viewModelScope.launch {
-            _quoteModel.value= GetQuotesUseCase(quoteDAO).getQuotes().first()[0]
+            val quotes = GetQuotesUseCase(quoteDAO).getQuotes().first()
+            val quote= when(quotes.isEmpty()){
+                true -> QuoteModel(id=0,"Solo sé que no sé nada","Sócrates")
+                else -> quotes[0]
+            }
+            _quoteModel.value=quote
         }
     }
     //---  Load data from a suspend fun and mutate state

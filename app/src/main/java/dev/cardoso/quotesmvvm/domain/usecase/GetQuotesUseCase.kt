@@ -1,4 +1,4 @@
-package dev.cardoso.quotesmvvm.domain
+package dev.cardoso.quotesmvvm.domain.usecase
 
 import dev.cardoso.quotesmvvm.data.QuoteRepositoryImpl
 import dev.cardoso.quotesmvvm.data.local.daos.QuoteDAO
