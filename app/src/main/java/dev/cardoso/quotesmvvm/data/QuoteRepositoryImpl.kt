@@ -7,11 +7,14 @@ import dev.cardoso.quotesmvvm.data.local.daos.QuoteDAO
 import dev.cardoso.quotesmvvm.data.model.QuoteModel
 import dev.cardoso.quotesmvvm.domain.QuoteRepository
 import kotlinx.coroutines.flow.*
+import javax.inject.Inject
 
 
-class QuoteRepositoryImpl(quoteDAO: QuoteDAO): QuoteRepository {
-    private val localDataSource= QuoteLocalDataSourceImpl(quoteDAO)
-    private val remoteDataSource= QuoteRemoteDataSourceImpl()
+class QuoteRepositoryImpl @Inject constructor(quoteDAO: QuoteDAO,
+                                              private val localDataSource: QuoteLocalDataSourceImpl,
+                                              private val remoteDataSource: QuoteRemoteDataSourceImpl): QuoteRepository {
+   // private val localDataSource= QuoteLocalDataSourceImpl(quoteDAO)
+   // private val remoteDataSource= QuoteRemoteDataSourceImpl()
 
     override suspend  fun getQuotes(): Flow<List<QuoteModel>> {
         val remoteQuotes =

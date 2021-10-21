@@ -3,6 +3,7 @@
     package="dev.cardoso.quotesmvvm">
     <uses-permission android:name="android.permission.INTERNET"/>
     <application
+        android:name=".QuotesApp"
         android:usesCleartextTraffic="true"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"

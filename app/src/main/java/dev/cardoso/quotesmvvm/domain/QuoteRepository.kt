@@ -1,5 +1,6 @@
 package dev.cardoso.quotesmvvm.domain
 
+
 import dev.cardoso.quotesmvvm.data.model.QuoteModel
 import kotlinx.coroutines.flow.Flow
 

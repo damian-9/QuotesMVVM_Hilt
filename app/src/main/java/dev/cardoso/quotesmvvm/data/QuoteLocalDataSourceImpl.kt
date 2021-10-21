@@ -7,8 +7,9 @@ import dev.cardoso.quotesmvvm.data.local.entities.QuoteEntity
 import dev.cardoso.quotesmvvm.data.model.QuoteModel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
+import javax.inject.Inject
 
-class QuoteLocalDataSourceImpl(private val quoteDAO: QuoteDAO):QuoteLocalDataSource {
+class QuoteLocalDataSourceImpl @Inject constructor(private val quoteDAO: QuoteDAO):QuoteLocalDataSource {
     override fun getQuotes(): Flow<List<QuoteModel>> {
         val quotes = quoteDAO.getQuotes()
         val quotesMapped= quotes.map {
